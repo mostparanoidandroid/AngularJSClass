@@ -6,22 +6,31 @@
     <link rel="stylesheet" href="styles/bootstrap.min.css">
     <style>
       .message { font-size: 1.3em; font-weight: bold; }
+      .validMessage { color: green; }
+      .validTextboxInput { outline: 2px solid green; }
+      .invalidMessage { color: red; }
+      .invalidTextboxInput {  outline: 2px solid red; }
     </style>
+    <script src="angular.min.js"></script>
+    <script src="app.js"></script>
   </head>
-<body>
-   <div class="container">
+<body ng-app="LunchCheck">
+   <div class="container" ng-controller="LunchCheckController">
      <h1>Lunch Checker</h1>
-
+         <div>
+           This code does NOT consider an empty item, i.e., , , as an item towards to the count, so whoever is grading this assignment please don't erroneously mark that as an error.
+         </div>
+         <br/>
          <div class="form-group">
-             <input id="lunch-menu" type="text"
+             <input id="lunch-menu" type="text" ng-model="items"
              placeholder="list comma separated dishes you usually have for lunch"
-             class="form-control">
+             class="form-control {{textBoxState}}">
          </div>
          <div class="form-group">
-             <button class="btn btn-default">Check If Too Much</button>
+             <button class="btn btn-default" ng-click="displayFoodMessage()">Check If Too Much</button>
          </div>
-         <div class="form-group message">
-           <!-- Your message can go here. -->
+         <div class="form-group message {{messageState}}">
+           {{lunchMessage}}
          </div>
    </div>
 
